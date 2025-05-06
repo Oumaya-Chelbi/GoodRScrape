@@ -91,7 +91,18 @@ def nettoyage(texte):
     print(f"Après nettoyage: {texte[:100]}...")  # Débogage
     return texte.strip()
 
+import spacy
 
+# Charger le modèle spaCy en anglais
+nlp = spacy.load("en_core_web_sm")
+
+def lemmatisation_verbale_base_en(texte):
+    doc = nlp(texte)
+    return [
+        token.lemma_.lower()
+        for token in doc
+        if token.pos_ == "VERB" and token.lemma_.isalpha()
+    ]
 
 
 
@@ -100,11 +111,14 @@ def bag_of_words(text, mots_vides, datatype="tokens"):
     if datatype == "caractères":
         return Counter(w for w in text if w and not w.isspace() and w not in mots_vides)
     elif datatype == "tokens":
-        return Counter(w for w in text.lower().split() if w and w not in mots_vides)
+        mots_lemmatises = lemmatisation_verbale_base_en(text)
+        return Counter(w for w in mots_lemmatises if w not in mots_vides)
     elif datatype not in DATATYPES:
         raise ValueError(f"datatype incorrecte: {datatype}, attendu: {DATATYPES}")
     else:
         raise NotImplementedError(f"datatype non gérée: {datatype}")
+
+
 
 
 def vec(bow, lexicon, representation):
