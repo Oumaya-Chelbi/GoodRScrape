@@ -147,7 +147,8 @@ def main():
         plt.savefig(f"results/confusion_{name.lower()}.png", dpi=300)
         plt.close()
 
-        # 7. Si on est avec la Random Forest, on va analyser les mots les plus importants
+        # 7. Si on est avec la Random Forest, on va analyser les mots les plus importants, ça a été abandonnée pour le compte-rendu parce que sinon ce serait
+        # trop long
         if name == "Random Forest":
             print(" Top 20 des mots les plus discriminants :")
             feat_imp = pd.DataFrame({
@@ -156,7 +157,7 @@ def main():
             }).sort_values("importance", ascending=False)
             print(feat_imp.head(20))
 
-            # Bonus : on vérifie que certains mots qu'on soupçonne sont bien utiles
+            # Bonus : on vérifie que certains mots qu'on soupçonne sont bien utiles mais c'est juste pour nous pas d'analyse dessus
             print(" Validation manuelle des mots clés :")
             mots_a_verifier = ["graphic", "volume", "art", "character"]
             for mot in mots_a_verifier:
@@ -179,7 +180,7 @@ def main():
     pd.DataFrame.from_dict(results, orient="index").to_csv("results/classification_report.csv")
     print(" Analyse terminée. Résultats sauvegardés dans /results")
 
-# Script lancé directement ?
+
 if __name__ == "__main__":
     import os
     os.makedirs("results", exist_ok=True)  # si le dossier results n'existe pas, on le crée
