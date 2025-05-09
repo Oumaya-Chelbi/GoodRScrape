@@ -24,7 +24,7 @@ def is_english(text):
 
 def main():
     # Charger le fichier CSV avec tous les livres scrapés
-    df = pd.read_csv("/Users/oumayachelbi/Desktop/M1S2/fouille/corpus_livres3/metadata_all.csv")
+    df = pd.read_csv("/Users/oumayachelbi/Desktop/M1S2/fouille/corpus_livres3/metadata.csv")
 
     # Filtrer les lignes pour garder que les résumés en anglais
     df_en = df[df["resume"].apply(is_english)]
@@ -34,7 +34,7 @@ def main():
     print(df_en["genre"].value_counts())
 
     # On enregistre ce nouveau sous-ensemble dans un nouveau fichier CSV
-    df_en.to_csv("metadata_en.csv", index=False)
+    df_en.to_csv("metadata_eng.csv", index=False)
 
     # Ensuite on recrée tous les fichiers .txt (résumés) mais seulement pour les livres en anglais
     for _, row in df_en.iterrows():
@@ -47,7 +47,7 @@ def main():
         titre_clean = titre.strip().replace("/", "-")
 
         # Création du chemin du dossier
-        output_path = os.path.join("corpus_livres_english3", genre_clean)
+        output_path = os.path.join("corpus_livres_english1", genre_clean)
         os.makedirs(output_path, exist_ok=True)  # Si le dossier existe pas, on le crée
 
         file_path = os.path.join(output_path, f"{titre_clean}.txt")
