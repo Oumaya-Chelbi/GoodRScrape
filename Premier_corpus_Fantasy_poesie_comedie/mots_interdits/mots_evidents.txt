@@ -1,0 +1,16 @@
+poetry
+poem
+poems
+poet
+comic
+comics
+humor
+joke
+fantasy
+magic
+kingdom
+book
+novel
+story
+genre
+author
