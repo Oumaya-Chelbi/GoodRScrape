@@ -76,7 +76,7 @@ def bag_of_words(text, mots_vides, datatype="tokens"):
 
 # Fonction principale pour exécuter le processus d'analyse
 def main():
-    mots_vides = read_lines_set("/home/ines/GoodRScrape/Premier_corpus_Fantasy_poesie_comedie/mots_vides.txt")  # Remplacez par le chemin vers votre fichier de mots vides
+    mots_vides = read_lines_set("*/GoodRScrape/Premier_corpus_Fantasy_poesie_comedie/mots_vides.txt")  # Remplacez par le chemin vers votre fichier de mots vides
 
     # Chargement du dataset
     df = pd.read_csv("metadata_eng.csv")  
